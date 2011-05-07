@@ -1,0 +1,19 @@
+﻿            //profile.SetPreference("extensions.firebug.DBG_NETEXPORT", false);
+            //profile.SetPreference("extensions.firebug.onByDefault", false);
+            //profile.SetPreference("extensions.firebug.net.enableSites", true);
+
+            //profile.SetPreference("extensions.firebug.defaultPanelName", "net");  //needed?
+            //profile.SetPreference("extensions.firebug.previousPlacement", 1);  // neeeded?
+
+//            profile.add_extension "path/to/firebug.xpi"
+//profile.add_extension "path/to/fireStarter.xpi"
+//profile.add_extension "path/to/netExport.xpi")
+
+//profile['extensions.firebug.currentVersion']    = "1.7.0a3" # avoid 'first run' tab
+//profile["extensions.firebug.previousPlacement"] = 1
+//profile["extensions.firebug.onByDefault"]       = true
+//profile["extensions.firebug.defaultPanelName"]  = "net"
+//profile["extensions.firebug.net.enableSites"]   = true
+
+//profile["extensions.firebug.netexport.defaultLogDir"]          = output_dir
+//profile["extensions.firebug.netexport.alwaysEnableAutoExport"] = true
