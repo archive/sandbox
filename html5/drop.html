@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>drop</title>
+<style>
+
+#drop-zone {
+	width: 300px;
+	height: 50px;
+	border: dotted 1px black;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div id="drop-zone">
+	<p>drop your files here</p>
+</div>
+<pre id="log"></pre>
+
+<script src="jquery.js"></script>
+<script>
+    
+    var log = function(message){
+        var messages = $("#log").text();
+        $("#log").text(messages + message + "\n"); 
+    };
+    
+    //$("body").bind("ondragstart", function(event){log("dragover");    }));
+    // animation
+    
+    //var updateStyle = function()
+
+
+    var dropZone = document.getElementById('drop-zone');
+
+    dropZone.addEventListener("dragover", function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        log("dragover");
+    }, true);
+    
+    dropZone.addEventListener("drop", function(event) {
+        event.preventDefault();
+        var dt = event.dataTransfer;
+        var files = dt.files;
+        for (var i = 0; i<files.length; i++) {
+            var file = files[i];
+            log("drop" + file);
+        }
+    }, false);
+    
+</script>
+
+</body>
+<html>
