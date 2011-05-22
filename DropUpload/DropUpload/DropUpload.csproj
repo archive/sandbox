@@ -74,6 +74,8 @@
     <Content Include="Content\way1\loading.gif" />
     <Content Include="Content\way2\url.txt" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Home\UploadDone.aspx" />
+    <Content Include="Views\Home\UploadView.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

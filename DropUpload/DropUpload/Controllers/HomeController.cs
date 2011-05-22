@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,7 +23,17 @@ namespace DropUpload.Controllers
                 var content = textReader.ReadToEnd();
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("UploadDone");
+        }
+
+        public ActionResult UploadView(HttpPostedFileBase file)
+        {
+            return View();
+        }
+
+        public ActionResult UploadDone()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -30,12 +41,17 @@ namespace DropUpload.Controllers
         {
             //ContentType: "application/octet-stream"
 
-            var keys = Request.Form.AllKeys;
+            try
+            {
+                TextReader textReader = new StreamReader(Request.InputStream);
+                var content = textReader.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, "application/json");
+            }
 
-            TextReader textReader = new StreamReader(Request.InputStream);
-            var content = textReader.ReadToEnd();
-
-            return RedirectToAction("Index");
+            return Json(new { success = true }, "text/html");
         }
     }
 }
