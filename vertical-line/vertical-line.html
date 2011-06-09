@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<title>vertical line demo</title>
+		<style>
+		    #area {
+		        width: 600px;
+		        height: 400px;
+		        border: 1px solid gray;
+		        z-index: 100;
+		    }
+		    
+		    #vertical-line {
+		        width: 1px;
+		        border-left: 1px;
+		        border-left-color: red;
+		        border-left-style: solid;
+		        display: none;
+		        z-index: 200;
+		        position: absolute; 
+		    }
+		</style>
+	</head>
+	<body>
+	    <div id="area"></div>
+	    <div id="vertical-line"></div>
+	    <script>
+	        
+	        var area = $("#area");
+	        var line = $("#vertical-line");
+	        
+	        line.height(area.height());
+	        var top = area.offset().top;
+	        var left = area.offset().left + 1;
+	        line.css("top", top + "px");
+	        line.css("left", left + "px");
+            line.show();
+
+	        area.mousemove(function(eventData){
+	            var left = eventData.clientX; 
+                line.css("left", left + "px");   
+            });
+	        
+	    </script>
+	</body>
+</html>
