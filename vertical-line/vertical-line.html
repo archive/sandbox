@@ -27,20 +27,24 @@
 	    <div id="vertical-line"></div>
 	    <script>
 	        
-	        var area = $("#area");
-	        var line = $("#vertical-line");
-	        
-	        line.height(area.height());
-	        var top = area.offset().top;
-	        var left = area.offset().left + 1;
-	        line.css("top", top + "px");
-	        line.css("left", left + "px");
-            line.show();
+			$(document).ready(function() {
 
-	        area.mousemove(function(eventData){
-	            var left = eventData.clientX; 
-                line.css("left", left + "px");   
-            });
+		        var area = $("#area");
+		        var line = $("#vertical-line");
+		        
+		        line.height(area.height());
+		        var top = area.offset().top;
+		        var left = area.offset().left + 1;
+		        line.css("top", top + "px");
+		        line.css("left", left + "px");
+	            line.show();
+
+		        area.mousemove(function(eventData){
+		            var left = eventData.clientX; 
+	                line.css("left", left + "px");   
+	            });
+
+    		});
 	        
 	    </script>
 	</body>
