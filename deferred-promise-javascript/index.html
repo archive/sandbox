@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Deferred</title>    		
+</head>
+<body>
+
+	<form method="post">
+		<input type="text" id="data" />
+		<input type="button" value="ok" id="ok">	
+	</form>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
+	<script type="text/javascript" >
+
+	var userConfirmation = function(){
+		var defeered = $.Deferred();
+		var answer = confirm('press ok');
+		return defeered.resolve({'answer': answer});		
+	};
+
+	var userInput = function(){
+		var defeered = $.Deferred();
+		$('#ok').click(function(){
+			defeered.resolve({data:$('#data').val()});
+		});
+		return defeered.promise();
+	};
+
+	$.when(userConfirmation(),userInput())
+		.then(function(confirmation, input){
+			alert('user confirmation: ' + confirmation.answer + ' and user input: ' + input.data);			
+		})
+		.done(function(){
+			//alert('done');
+		})
+		.fail(function() {
+			alert('fail');
+		});
+
+	// .progress is under development
+
+</script>
+
+
+
+</body>
+</html>
