@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Deferred</title>    		
+    <title>Deferred</title>            
 </head>
 <body>
 
-	<form method="post">
-		<input type="text" id="data" value="yes" />
-		<input type="button" value="ok" id="ok">	
-	</form>
+    <form method="post">
+        <input type="text" id="data" value="yes" />
+        <input type="button" value="ok" id="ok">    
+    </form>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
 
-	<script type="text/javascript" >
+    <script type="text/javascript" >
 
-		var userConfirmation = function(){
-			var deferred = $.Deferred();
-			var answer = confirm('press ok');
-			return deferred.resolve({'answer': answer});		
-		};
+        var userConfirmation = function(){
+            var deferred = $.Deferred();
+            var answer = confirm('press ok');
+            return deferred.resolve({'answer': answer});        
+        };
 
-		var userInput = function(){
-			var deferred = $.Deferred();
+        var userInput = function(){
+            var deferred = $.Deferred();
 
-			$('#ok').click(function(){
-				var text = $('#data').val();
-				var obj = {data:text};
-				
-				if(text !== "yes"){
-					deferred.reject(obj);		
-				}else{
-					deferred.resolve(obj);	
-				}
-			});
-			
-			return deferred.promise();
-		};
+            $('#ok').click(function(){
+                var text = $('#data').val();
+                var obj = {data:text};
+                
+                if(text !== "yes"){
+                    deferred.reject(obj);        
+                }else{
+                    deferred.resolve(obj);    
+                }
+            });
+            
+            return deferred.promise();
+        };
 
-		$.when(userConfirmation(),userInput())
-			.done(function(confirmation, input){
-				alert('user confirmation: ' + confirmation.answer + ' and user input: ' + input.data);	
-			})
-			.fail(function() {
-				alert('fail');
-			});
+        $.when(userConfirmation(),userInput())
+            .done(function(confirmation, input){
+                alert('user confirmation: ' + confirmation.answer + ' and user input: ' + input.data);    
+            })
+            .fail(function() {
+                alert('fail');
+            });
 
-		// .progress(function() {
-		// 		when someone calls "deferred.notify()"
-		// 		alert('progress);
-		// })
+        // .progress(function() {
+        //         when someone calls "deferred.notify()"
+        //         alert('progress);
+        // })
 
-	</script>
+    </script>
 
 </body>
 </html>
