@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Scroll and colorize</title>
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			color: rgb(255,255,255);
+			background-color: rgb(1,52,64);
+			font-size: 80px;
+		}
+
+		section {
+			display: none;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<article>
+			First page
+		</article>
+		<article>
+			Second page
+		</article>
+		<article>
+			Third page
+		</article>
+		<article>
+			Fourth page
+		</article>    
+	</section>
+	
+	<script>
+		var threshold = 0.7;
+		var colors = [
+			[1, 52, 64],
+			[171, 26, 37],
+			[217, 121, 37],
+			[239, 231, 190]
+		];
+
+		var articleHeight = window.document.documentElement.clientHeight * 1.20;
+		var articles = document.querySelectorAll('article');
+		Array.prototype.forEach.call(articles, function (article) {
+			article.style.height = articleHeight + 'px';
+		});
+
+		var nextColor = function (index, color, percent) {
+			var step = (colors[index][color] - colors[index - 1][color]) / ((1 - threshold) * 100);
+			return colors[index - 1][color] + Math.round(step * (percent - threshold) * 100);
+		};
+
+		var scroll = function (evt) {
+			var percent = window.pageYOffset / articleHeight;
+			var absPercent = parseInt(percent);
+			var relativePercent = percent - absPercent;
+
+			if (relativePercent > threshold) {
+				var index = absPercent + 1;
+				var r = nextColor(index, 0, relativePercent);
+				var g = nextColor(index, 1, relativePercent);
+				var b = nextColor(index, 2, relativePercent);
+				var rgb = 'rgb(' + r + ',' + g + ',' + b + ')';
+				document.body.style.backgroundColor = rgb;
+			}
+		};
+
+		window.onscroll = scroll;
+
+		// TODO: window.onhashchange & window.requestAnimationFrame(...);
+	</script>
+	
+	<style>
+		section {
+			display: block;
+		}
+	</style>
+	
+</body>
+</html>
